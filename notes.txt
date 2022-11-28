@@ -1,0 +1,66 @@
+<>16/November/2022 1:21 PM Yangon Myanmar
+
+Colar palette for chat app
+https://colorswall.com/palette/14254/
+
+<>17/November/2022 2:30 PM Yangon Myanmar
+
+-Firebase Docs I used 
+https://firebase.google.com/docs/web/setup?authuser=0&hl=en
+https://firebase.google.com/docs/auth/web/password-auth
+
+-For no reason, project console is telling me to add autocomplete attribute to my form inputs.
+This is the documentation I read to solve the problem.
+https://www.chromium.org/developers/design-documents/create-amazing-password-forms/
+
+-In Registration Form I have 4 inputs 
+I console.log the file input value and saw c:\fakepath 
+So I checked docs to see c:\fakepath is an error or not.
+
+https://www.nextofwindows.com/how-to-get-rid-of-cfakepath-in-ie-when-uploading-a-file-to-the-website-fix
+https://campus.barracuda.com/product/campus/knowledgebase/50160000000IUwkAAG/Why+do+I+see+%22C-%5Cfakepath%22+placed+in+place+of+my+actual+path+using+the+Upload+functionality+on+my+Barracuda+Product%3F/
+https://stackoverflow.com/questions/4851595/how-to-resolve-the-c-fakepath
+
+It is not an error. It is browser safety features for blocking server from accessing local machine disk structure.
+
+According to the specifications of HTML5, 
+a file upload control should not reveal the real local path to the file 
+you have selected, if you manipulate its value string with JavaScript. 
+Instead, the string that is returned by the script, which handles the file 
+information is c:\fakepath.
+
+This requirement is already implemented in Internet Explorer 8 
+– the real path to the file will be shown only if the page that contains 
+the control is added to the trusted sites collection of the browser.
+
+-We can send email and password directly to firebase but we can't send file and name to firebase directly.
+email and password are for authentication.
+
+First, initialize auth in firebase
+
+authentication->Sign-in method-> native & additional providers.
+For the sake of this project, Email/password native provider is relatable.
+Enable it and save.
+
+After enabled auth from firebase our code start working 
+when i sign up i get all userCredential by consoling out.
+Additional thing I gained is ... Firebase hashed the password.
+
+This is how auth with email and password works.
+There is one thing left, How do we send image/file and name/string to firebase ?
+
+I refered this docs for above mentioned issue.
+https://firebase.google.com/docs/storage/web/upload-files
+
+By default, a Cloud Storage bucket requires Firebase Authentication to perform 
+any action on the bucket's data or files. You can change your Firebase Security Rules 
+for Cloud Storage to allow unauthenticated access. Since Firebase and your project's 
+default App Engine app share this bucket, configuring public access may make newly 
+uploaded App Engine files publicly accessible, as well. Be sure to restrict access to your 
+Cloud Storage bucket again when you set up Authentication.
+
+We have to go to cloud storage first and enable it.
+
+This is chat app, I am not alone I can register I can find people.
+So Authentication and Fire Store is not enough we need to store user data in firestore database.
+
